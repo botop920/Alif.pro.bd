@@ -111,7 +111,7 @@ html, body {
     will-change: transform;
 }
 .hero-title {
-    font-size: clamp(3rem, 11vw, 12rem);
+    font-size: 13vw;
     line-height: 1.1;
     margin: 0;
     padding: 0.1em 0;
