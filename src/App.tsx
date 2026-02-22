@@ -359,7 +359,7 @@ export default function App() {
                   href="#"
                   className="text-white hover:text-brandRed transition-colors hoverable border-b border-gray-600 hover:border-brandRed pb-0.5"
                 >
-                  Examio.xyz
+                .
                 </a>
               </p>
             </div>
