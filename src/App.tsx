@@ -354,7 +354,7 @@ export default function App() {
             {/* Intro Paragraph (Top Center) */}
             <div className="absolute top-[12%] md:top-[18%] z-30 opacity-0 fade-in-elem w-full text-center px-4">
               <p className="text-gray-400 font-medium text-sm md:text-lg tracking-wide">
-                Hi, I'm Alif Shahariar. Founder of{' '}
+                Hi, I'm Alif Shahariar.
                 <a
                   href="#"
                   className="text-white hover:text-brandRed transition-colors hoverable border-b border-gray-600 hover:border-brandRed pb-0.5"
@@ -443,9 +443,9 @@ export default function App() {
             {/* Location Info (Bottom Left) */}
             <div className="absolute bottom-6 left-6 md:bottom-8 md:left-12 z-30 opacity-0 fade-in-elem">
               <div className="text-xs md:text-sm text-gray-500">
-                based in <br />
+                Founder of <br />
                 <span className="text-gray-300 font-medium">
-                  Natore, Bangladesh.
+                  Examio.xyz
                 </span>
               </div>
             </div>
@@ -645,7 +645,7 @@ export default function App() {
           </div>
 
           <p className="mt-12 md:mt-16 text-xs text-gray-700">
-            © 2026 ALIF SHAHARIAR. BUILT IN BANGLADESH.
+            © 2026 ALIF SHAHARIAR❤️.
           </p>
         </div>
 
