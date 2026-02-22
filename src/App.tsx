@@ -339,12 +339,7 @@ export default function App() {
             Let's Talk
           </a>
         </div>
-        <a
-          href="#contact"
-          className="md:hidden hoverable bg-white text-black px-5 py-2 rounded-full text-xs font-semibold"
-        >
-          Talk
-        </a>
+
       </nav>
 
       {/* Main Content Wrapped for Lenis Smooth Scroll */}
