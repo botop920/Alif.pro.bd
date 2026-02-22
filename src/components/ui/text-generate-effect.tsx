@@ -8,11 +8,13 @@ export const TextGenerateEffect = ({
   className,
   filter = true,
   duration = 0.5,
+  highlightWords = [],
 }: {
   words: string;
   className?: string;
   filter?: boolean;
   duration?: number;
+  highlightWords?: string[];
 }) => {
   const [scope, animate] = useAnimate();
   const isInView = useInView(scope, { margin: "-100px" });
@@ -38,10 +40,18 @@ export const TextGenerateEffect = ({
     return (
       <motion.div ref={scope} className="flex flex-wrap gap-[0.35em]">
         {wordsArray.map((word, idx) => {
+          const cleanWord = word.replace(/[^a-zA-Z0-9-]/g, "").toLowerCase();
+          const isHighlight = highlightWords.some((hw) =>
+            cleanWord.includes(hw.toLowerCase())
+          );
+
           return (
             <motion.span
               key={word + idx}
-              className="opacity-0 inline-block"
+              className={cn(
+                "opacity-0 inline-block",
+                isHighlight ? "text-brandRed" : "dark:text-white text-white"
+              )}
               style={{
                 filter: filter ? "blur(10px)" : "none",
               }}

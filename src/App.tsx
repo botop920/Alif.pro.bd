@@ -351,19 +351,6 @@ export default function App() {
             {/* Ambient Glow */}
             <div className="ambient-glow-red"></div>
 
-            {/* Intro Paragraph (Top Center) */}
-            <div className="absolute top-[12%] md:top-[18%] z-30 opacity-0 fade-in-elem w-full text-center px-4">
-              <p className="text-gray-400 font-medium text-sm md:text-lg tracking-wide">
-                Hi, I'm Alif Shahariar.
-                <a
-                  href="#"
-                  className="text-white hover:text-brandRed transition-colors hoverable border-b border-gray-600 hover:border-brandRed pb-0.5"
-                >
-                .
-                </a>
-              </p>
-            </div>
-
             {/*
              * ============================================================
              * HERO TEXT LAYER SYSTEM
@@ -403,7 +390,7 @@ export default function App() {
                 absolute bottom-0 left-1/2 -translate-x-1/2
                 z-20 pointer-events-none
                 w-[85%] sm:w-[65%] md:w-[55%] lg:w-[42%] max-w-[680px]
-                h-[60dvh] md:h-[80vh]
+                h-[78dvh] md:h-[80vh]
                 flex items-end justify-center
                 opacity-0 image-anim parallax-img
               "
@@ -498,6 +485,7 @@ export default function App() {
               <TextGenerateEffect
                 words="Building innovative products driven by AI. Passionate about scaling startups and solving real-world problems."
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif font-medium leading-[1.2] text-white tracking-wide"
+                highlightWords={["AI", "Passionate", "startups", "real-world"]}
               />
 
               <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 text-left w-full pt-16 relative">
