@@ -141,38 +141,66 @@ export default function App() {
         });
      }
 
-    // --- 4. Intro Loading Animation ---
+    // --- 4. Intro Loading Animation (Butter Smooth) ---
     const timer = setTimeout(() => {
-        const heroTitles = new SplitType('.text-anim', { types: 'chars' });
+        // Split text for granular control
+        const heroTitles = new SplitType('.text-anim', { types: 'chars, words' });
         
         const tlIntro = gsap.timeline();
+
+        // Initial State Set
+        gsap.set('.text-anim', { opacity: 1 }); // Make parent visible so chars can be seen
+        gsap.set(heroTitles.chars, { y: 100, opacity: 0, filter: 'blur(10px)' });
+        gsap.set('.image-anim', { y: 100, opacity: 0, scale: 1.1, filter: 'blur(20px)' });
+        gsap.set('.fade-in-elem', { y: 20, opacity: 0, filter: 'blur(5px)' });
 
         tlIntro
         .to('.nav-anim', {
             opacity: 1,
             y: 0,
-            duration: 1,
-            ease: 'power2.out',
+            duration: 1.2,
+            ease: 'power3.out',
             delay: 0.2,
         })
         .to(
-            '.fade-in-elem',
-            { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: 'power3.out' },
-            '-=0.8'
-        )
-        .to('.text-anim', { opacity: 1, duration: 0.1 }, "-=0.8")
-        .to(
             heroTitles.chars,
-            { y: 0, duration: 0.8, stagger: 0.015, ease: 'back.out(1.5)' },
+            { 
+                y: 0, 
+                opacity: 1, 
+                filter: 'blur(0px)', 
+                duration: 1.5, 
+                stagger: 0.02, 
+                ease: 'power4.out' 
+            },
             '-=0.8'
         )
         .to(
             '.image-anim',
-            { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' },
-            '-=0.6'
+            { 
+                opacity: 1, 
+                y: 0, 
+                scale: 1, 
+                filter: 'blur(0px)', 
+                duration: 1.8, 
+                ease: 'expo.out' 
+            },
+            '-=1.2'
+        )
+        .to(
+            '.fade-in-elem',
+            { 
+                y: 0, 
+                opacity: 1, 
+                filter: 'blur(0px)', 
+                duration: 1, 
+                stagger: 0.1, 
+                ease: 'power2.out' 
+            },
+            '-=1.0'
         );
 
-        // --- 5. Pure Parallax on scroll ---
+        // --- 5. Organic Blurry Scroll Parallax ---
+        // Text Parallax (Moves faster, blurs out)
         gsap.to(".parallax-text", {
             scrollTrigger: {
                 trigger: "#hero",
@@ -180,10 +208,14 @@ export default function App() {
                 end: "bottom top",
                 scrub: true,
             },
-            yPercent: 30, // Text namber taratari
-            opacity: 0.2
+            yPercent: 50, 
+            opacity: 0,
+            filter: "blur(15px)",
+            scale: 0.9,
+            ease: "none"
         });
 
+        // Image Parallax (Moves slower, subtle blur)
         gsap.to(".parallax-img", {
             scrollTrigger: {
                 trigger: "#hero",
@@ -191,9 +223,12 @@ export default function App() {
                 end: "bottom top",
                 scrub: true,
             },
-            yPercent: 15, // Image namber aste aste
-            filter: "blur(4px)"
+            yPercent: 20,
+            scale: 1.05,
+            filter: "blur(8px) grayscale(50%)",
+            ease: "none"
         });
+
 
         // --- 6. Premium Scroll Reveal Animations ---
         const revealElements = document.querySelectorAll('.reveal-on-scroll');
@@ -331,7 +366,7 @@ export default function App() {
             </div>
 
             {/* Massive Background Typography (Fixed Center) */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center justify-center z-10 pointer-events-none parallax-text will-change-transform">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center justify-center z-10 pointer-events-none parallax-text">
               <div className="overflow-hidden w-full text-center py-2">
                 <h1 className="hero-title font-display uppercase tracking-tight text-white m-0 opacity-0 text-anim">
                   Tech Founder
@@ -346,7 +381,7 @@ export default function App() {
             </div>
 
             {/* Foreground User Image (Anchored perfectly to the bottom) */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 w-[95%] sm:w-[70%] md:w-[60%] lg:w-[45%] max-w-[700px] h-[85vh] md:h-[75vh] pointer-events-none flex items-end justify-center opacity-0 image-anim parallax-img will-change-transform">
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 w-[95%] sm:w-[70%] md:w-[60%] lg:w-[45%] max-w-[700px] h-[85vh] md:h-[75vh] pointer-events-none flex items-end justify-center opacity-0 image-anim parallax-img">
               <img
                 src="https://res.cloudinary.com/dejm7pz1d/image/upload/v1771718749/IMG_3072_m8dqgg.png"
                 alt="Alif Shahariar"
