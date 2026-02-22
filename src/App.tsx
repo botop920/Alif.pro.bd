@@ -201,33 +201,39 @@ export default function App() {
 
         // --- 5. Organic Blurry Scroll Parallax ---
         // Text Parallax (Moves faster, blurs out)
-        gsap.to(".parallax-text", {
-            scrollTrigger: {
-                trigger: "#hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: true,
-            },
-            yPercent: 50, 
-            opacity: 0,
-            filter: "blur(15px)",
-            scale: 0.9,
-            ease: "none"
-        });
+        gsap.fromTo(".parallax-text", 
+            { yPercent: 0, opacity: 1, filter: "blur(0px)", scale: 1 },
+            {
+                scrollTrigger: {
+                    trigger: "#hero",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true,
+                },
+                yPercent: 50, 
+                opacity: 0,
+                filter: "blur(15px)",
+                scale: 0.9,
+                ease: "none"
+            }
+        );
 
         // Image Parallax (Moves slower, subtle blur)
-        gsap.to(".parallax-img", {
-            scrollTrigger: {
-                trigger: "#hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: true,
-            },
-            yPercent: 20,
-            scale: 1.05,
-            filter: "blur(8px) grayscale(50%)",
-            ease: "none"
-        });
+        gsap.fromTo(".parallax-img", 
+            { yPercent: 0, scale: 1, filter: "blur(0px) grayscale(0%)" },
+            {
+                scrollTrigger: {
+                    trigger: "#hero",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true,
+                },
+                yPercent: 20,
+                scale: 0.95,
+                filter: "blur(8px) grayscale(50%)",
+                ease: "none"
+            }
+        );
 
 
         // --- 6. Premium Scroll Reveal Animations ---
@@ -366,7 +372,7 @@ export default function App() {
             </div>
 
             {/* Massive Background Typography (Fixed Center) */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center justify-center z-10 pointer-events-none parallax-text">
+            <div className="absolute top-[40%] md:top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center justify-center z-10 pointer-events-none parallax-text">
               <div className="overflow-hidden w-full text-center py-2">
                 <h1 className="hero-title font-display uppercase tracking-tight text-white m-0 opacity-0 text-anim">
                   Tech Founder
