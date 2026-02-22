@@ -9,6 +9,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import SplitType from 'split-type';
 import { TextGenerateEffect } from './components/ui/text-generate-effect';
+import { TypewriterEffectSmooth } from './components/ui/typewriter-effect';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -256,12 +257,15 @@ export default function App() {
           {/* 1. Hero Section (Award-Winning Clean Overlap Structure) */}
           <section
             id="hero"
-            className="relative w-full h-[100dvh] min-h-[700px] flex flex-col items-center justify-center overflow-hidden"
+            className="relative w-full h-[100dvh] md:min-h-[700px] flex flex-col items-center justify-center overflow-hidden"
           >
+            {/* Ambient Glow */}
+            <div className="ambient-glow-red"></div>
+
             {/* Intro Paragraph (Top Center) */}
-            <div className="absolute top-[18%] md:top-[22%] z-30 opacity-0 fade-in-elem w-full text-center px-4">
-              <p className="text-gray-400 font-medium text-sm md:text-lg">
-                👋, my name is Alif Shahariar. Founder of{' '}
+            <div className="absolute top-[15%] md:top-[18%] z-30 opacity-0 fade-in-elem w-full text-center px-4">
+              <p className="text-gray-400 font-medium text-sm md:text-lg tracking-wide">
+                👋 Hi, I'm Alif Shahariar. Founder of{' '}
                 <a
                   href="#"
                   className="text-white hover:text-brandRed transition-colors hoverable border-b border-gray-600 hover:border-brandRed pb-0.5"
@@ -287,11 +291,11 @@ export default function App() {
             </div>
 
             {/* Foreground User Image (Anchored perfectly to the bottom) */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 w-[95%] sm:w-[70%] md:w-[60%] lg:w-[45%] max-w-[700px] h-[75vh] pointer-events-none flex items-end justify-center opacity-0 image-anim parallax-img">
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 w-[95%] sm:w-[70%] md:w-[60%] lg:w-[45%] max-w-[700px] h-[85vh] md:h-[75vh] pointer-events-none flex items-end justify-center opacity-0 image-anim parallax-img">
               <img
                 src="https://res.cloudinary.com/dejm7pz1d/image/upload/v1771718749/IMG_3072_m8dqgg.png"
                 alt="Alif Shahariar"
-                className="w-full h-full object-contain object-bottom img-mask-fade filter grayscale transition-all duration-700 pointer-events-auto hover:grayscale-0"
+                className="w-full h-full object-contain object-bottom founder-image-glow pointer-events-auto"
               />
             </div>
 
@@ -352,15 +356,19 @@ export default function App() {
               {/* Text Generate Effect Class */}
               <TextGenerateEffect
                 words="Building innovative products driven by AI. Passionate about scaling startups and solving real-world problems."
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-medium leading-[1.15] text-white tracking-wide"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif font-medium leading-[1.2] text-white tracking-wide"
               />
 
               <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 text-left w-full border-t border-gray-800 pt-16">
                 <div>
-                  <h4 className="text-2xl font-bold mb-4 text-white flex items-center gap-3">
-                    <i className="ph ph-rocket-launch text-brandRed"></i>{' '}
-                    Startup Founder
-                  </h4>
+                  <div className="flex items-center gap-2 mb-4">
+                    <i className="ph ph-rocket-launch text-brandRed text-2xl"></i>
+                    <TypewriterEffectSmooth 
+                      words={[{ text: "Startup", className: "text-white text-2xl font-bold" }, { text: "Founder", className: "text-white text-2xl font-bold" }]}
+                      className="my-0"
+                      cursorClassName="bg-brandRed h-6 md:h-8"
+                    />
+                  </div>
                   <p className="text-gray-400 text-base leading-relaxed">
                     Leading the vision, strategy, and execution of
                     next-generation digital platforms designed to create massive
@@ -368,9 +376,14 @@ export default function App() {
                   </p>
                 </div>
                 <div>
-                  <h4 className="text-2xl font-bold mb-4 text-white flex items-center gap-3">
-                    <i className="ph ph-cpu text-brandRed"></i> AI Enthusiast
-                  </h4>
+                  <div className="flex items-center gap-2 mb-4">
+                    <i className="ph ph-cpu text-brandRed text-2xl"></i>
+                    <TypewriterEffectSmooth 
+                      words={[{ text: "AI", className: "text-white text-2xl font-bold" }, { text: "Enthusiast", className: "text-white text-2xl font-bold" }]}
+                      className="my-0"
+                      cursorClassName="bg-brandRed h-6 md:h-8"
+                    />
+                  </div>
                   <p className="text-gray-400 text-base leading-relaxed">
                     Deeply exploring how Artificial Intelligence and Machine
                     Learning technologies can be leveraged to completely disrupt

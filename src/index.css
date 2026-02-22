@@ -1,8 +1,10 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 @theme {
   --font-sans: 'Inter', sans-serif;
   --font-display: 'Anton', sans-serif;
+  --font-serif: 'Playfair Display', serif;
   --color-brandRed: #FF0033;
   --color-darkBg: #050505;
   --color-darkElevated: #111111;
@@ -60,18 +62,51 @@ html, body {
     .cursor-dot, .cursor-outline { display: none !important; }
 }
 
-/* Outline text effect */
+/* Outline text effect with Neon Sweep */
 .text-outline-red {
     color: transparent;
     -webkit-text-stroke: 1.5px var(--color-brandRed);
-    transition: color 0.4s ease;
+    background: linear-gradient(110deg, transparent 35%, rgba(255, 0, 51, 0.3) 45%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 0, 51, 0.3) 55%, transparent 65%);
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: shine 6s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    text-shadow: 0 0 30px rgba(255, 0, 51, 0.3);
 }
+
+@keyframes shine {
+    0% { background-position: 250% 0; }
+    100% { background-position: -250% 0; }
+}
+
 @media (min-width: 768px) {
     .text-outline-red { -webkit-text-stroke: 2px var(--color-brandRed); }
 }
-.text-outline-red:hover { color: var(--color-brandRed); }
 
-/* Typography */
+/* Founder Image Styles */
+.founder-image-glow {
+    filter: grayscale(100%) contrast(1.1) drop-shadow(0 0 25px rgba(255, 255, 255, 0.15));
+    transition: filter 0.5s ease;
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+}
+.founder-image-glow:hover {
+    filter: grayscale(0%) contrast(1.05) drop-shadow(0 0 30px rgba(255, 0, 51, 0.2));
+}
+
+/* Ambient Glow */
+.ambient-glow-red {
+    position: absolute;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(255, 0, 51, 0.08) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(60px);
+}
 .hero-title {
     font-size: clamp(3rem, 11vw, 12rem);
     line-height: 1.1;

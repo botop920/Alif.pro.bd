@@ -25,12 +25,10 @@ export const TextGenerateEffect = ({
         {
           opacity: 1,
           filter: filter ? "blur(0px)" : "none",
-          y: 0,
         },
         {
-          duration: duration ? duration : 0.8,
-          delay: stagger(0.04), // Faster stagger for smoother "flow"
-          ease: [0.16, 1, 0.3, 1], // "easeOutExpo" - very smooth
+          duration: duration ? duration : 1,
+          delay: stagger(0.2),
         }
       );
     }
@@ -38,15 +36,14 @@ export const TextGenerateEffect = ({
 
   const renderWords = () => {
     return (
-      <motion.div ref={scope} className="flex flex-wrap gap-x-[0.25em]">
+      <motion.div ref={scope} className="flex flex-wrap gap-[0.35em]">
         {wordsArray.map((word, idx) => {
           return (
             <motion.span
               key={word + idx}
-              className={cn("opacity-0 translate-y-1", filter ? "blur(8px)" : "none")} // Reduced blur and translation
+              className="opacity-0 inline-block"
               style={{
-                display: "inline-block",
-                willChange: "transform, opacity, filter",
+                filter: filter ? "blur(10px)" : "none",
               }}
             >
               {word}
@@ -58,9 +55,9 @@ export const TextGenerateEffect = ({
   };
 
   return (
-    <div className={cn("font-sans", className)}>
+    <div className={cn("font-serif tracking-tight", className)}>
       <div className="mt-4">
-        <div className="leading-snug tracking-wide">
+        <div className="leading-snug">
           {renderWords()}
         </div>
       </div>
