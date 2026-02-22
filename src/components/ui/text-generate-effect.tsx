@@ -50,7 +50,9 @@ export const TextGenerateEffect = ({
               key={word + idx}
               className={cn(
                 "opacity-0 inline-block",
-                isHighlight ? "text-brandRed" : "dark:text-white text-white"
+                isHighlight
+                  ? "bg-brandRed text-white px-2 py-0.5 rounded-md"
+                  : "dark:text-white text-white"
               )}
               style={{
                 filter: filter ? "blur(10px)" : "none",

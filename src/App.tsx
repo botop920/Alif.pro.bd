@@ -10,6 +10,7 @@ import Lenis from 'lenis';
 import SplitType from 'split-type';
 import { TextGenerateEffect } from './components/ui/text-generate-effect';
 import { TypewriterEffectSmooth } from './components/ui/typewriter-effect';
+import { EncryptedText } from './components/ui/encrypted-text';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -542,7 +543,11 @@ export default function App() {
                   <div className="w-full h-[1px] bg-gray-800 absolute bottom-0 left-0 line-reveal"></div>
                   <div className="md:w-1/2">
                     <h3 className="text-5xl md:text-7xl lg:text-[7rem] font-display uppercase text-white group-hover:-webkit-text-stroke-[2px] group-hover:-webkit-text-stroke-brandRed group-hover:text-transparent transition-all duration-500 mb-6 md:mb-0 leading-none break-words">
-                      Examio.xyz
+                      <EncryptedText 
+                        text="Examio.xyz" 
+                        revealDelayMs={100}
+                        encryptedClassName="text-brandRed"
+                      />
                     </h3>
                   </div>
                   <div className="md:w-1/2 md:pl-12 flex flex-col items-start">
@@ -567,7 +572,11 @@ export default function App() {
                   <div className="w-full h-[1px] bg-gray-800 absolute bottom-0 left-0 line-reveal"></div>
                   <div className="md:w-1/2">
                     <h3 className="text-5xl md:text-7xl lg:text-[7rem] font-display uppercase text-white group-hover:-webkit-text-stroke-[2px] group-hover:-webkit-text-stroke-brandRed group-hover:text-transparent transition-all duration-500 mb-6 md:mb-0 leading-none break-words">
-                      AI Labs
+                      <EncryptedText 
+                        text="AI Labs" 
+                        revealDelayMs={100}
+                        encryptedClassName="text-brandRed"
+                      />
                     </h3>
                   </div>
                   <div className="md:w-1/2 md:pl-12 flex flex-col items-start">
