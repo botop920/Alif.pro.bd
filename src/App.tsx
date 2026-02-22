@@ -356,7 +356,7 @@ export default function App() {
             {/* Intro Paragraph (Top Center) */}
             <div className="absolute top-[15%] md:top-[18%] z-30 opacity-0 fade-in-elem w-full text-center px-4">
               <p className="text-gray-400 font-medium text-sm md:text-lg tracking-wide">
-                👋 Hi, I'm Alif Shahariar. Founder of{' '}
+                Hi, I'm Alif Shahariar.
                 <a
                   href="#"
                   className="text-white hover:text-brandRed transition-colors hoverable border-b border-gray-600 hover:border-brandRed pb-0.5"
