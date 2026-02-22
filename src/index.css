@@ -1,68 +1,166 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Anton', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --color-brandRed: #FF0033;
+  --color-darkBg: #050505;
+  --color-darkElevated: #111111;
 }
 
-@layer base {
-  html {
-    scroll-behavior: initial;
-    background-color: #000000;
-  }
-  body {
-    @apply bg-black text-white antialiased overflow-x-hidden;
-  }
+/* Base Setup */
+html, body {
+    background-color: var(--color-darkBg);
+    color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    width: 100%;
 }
 
-/* Premium Noise Texture */
-.noise-overlay {
+::-webkit-scrollbar { display: none; }
+
+/* Premium noise texture */
+.noise-bg {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
     pointer-events: none;
-    z-index: 9999;
-    opacity: 0.03;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    z-index: 9998;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
 /* Custom Cursor */
-.cursor-dot {
-    transition: width 0.3s, height 0.3s, background-color 0.3s;
+@media (pointer: fine) {
+    body { cursor: none; }
+    .cursor-dot, .cursor-outline {
+        position: fixed;
+        top: 0; left: 0;
+        border-radius: 50%;
+        z-index: 9999;
+        pointer-events: none;
+        will-change: transform;
+    }
+    .cursor-dot {
+        width: 8px; height: 8px;
+        background-color: var(--color-brandRed);
+    }
+    .cursor-outline {
+        width: 40px; height: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    }
+    body.cursor-hover .cursor-outline {
+        width: 80px; height: 80px;
+        background-color: rgba(255, 0, 51, 0.1);
+        border-color: var(--color-brandRed);
+        /* Removed backdrop-filter for performance */
+    }
 }
-body.hovering .cursor-dot {
-    width: 60px;
-    height: 60px;
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(2px);
-    border: 1px solid rgba(255,255,255,0.2);
+@media (hover: none) and (pointer: coarse) {
+    .cursor-dot, .cursor-outline { display: none !important; }
 }
 
-/* Typography Utilities */
-.text-huge {
-    font-size: clamp(4rem, 15vw, 15rem);
-    line-height: 0.85;
-    letter-spacing: -0.04em;
-}
-
-.text-outline {
+/* Outline text effect with Neon Sweep */
+.text-outline-red {
     color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+    -webkit-text-stroke: 1.5px var(--color-brandRed);
+    background: linear-gradient(110deg, transparent 35%, rgba(255, 0, 51, 0.3) 45%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 0, 51, 0.3) 55%, transparent 65%);
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: shine 10s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    /* Removed text-shadow for performance */
+    will-change: background-position;
 }
 
-/* Thin Grid Lines */
-.grid-line-x {
-    width: 100%;
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.08);
-}
-.grid-line-y {
-    width: 1px;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.08);
+@keyframes shine {
+    0% { background-position: 250% 0; }
+    100% { background-position: -250% 0; }
 }
 
-/* Hide scrollbar for clean look */
-::-webkit-scrollbar {
-    display: none;
+@media (min-width: 768px) {
+    .text-outline-red { -webkit-text-stroke: 2px var(--color-brandRed); }
+}
+
+/* Founder Image Styles */
+.founder-image-glow {
+    filter: grayscale(100%) contrast(1.1);
+    transition: filter 0.5s ease;
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    will-change: filter;
+    transform: translateZ(0);
+}
+.founder-image-glow:hover {
+    filter: grayscale(0%) contrast(1.05);
+}
+
+/* Ambient Glow */
+.ambient-glow-red {
+    position: absolute;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(255, 0, 51, 0.05) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateZ(0);
+    pointer-events: none;
+    z-index: 0;
+    /* Removed blur filter, relying on radial gradient */
+    will-change: transform;
+}
+.hero-title {
+    font-size: clamp(3rem, 11vw, 12rem);
+    line-height: 1.1;
+    margin: 0;
+    padding: 0.1em 0;
+    white-space: nowrap;
+    will-change: transform, opacity;
+    transform: translateZ(0);
+}
+
+/* Performance Optimizations */
+.parallax-text, .parallax-img, .reveal-on-scroll {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+.will-change-transform {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* Image Bottom Fade Mask */
+.img-mask-fade {
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+
+/* SplitType setup */
+.line { overflow: hidden; padding-bottom: 0.15em; margin-bottom: -0.15em; }
+.char { transform: translateY(115%); transition: transform 0.5s; }
+
+/* Magnetic button */
+.magnetic-wrap { position: relative; display: inline-block; padding: 20px; margin: -20px; }
+
+/* Infinite Marquee */
+.marquee-wrapper {
+    display: flex;
+    width: max-content;
+    animation: marquee 20s linear infinite;
+}
+@keyframes marquee {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Magic Fixed Image styling */
+#magic-img {
+    will-change: transform;
+    /* Ekdom center e set kora holo, JS diye x transform kore side e anbo */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
 }
