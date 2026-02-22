@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Anton', sans-serif;
+  --color-brandRed: #FF0033;
+  --color-darkBg: #050505;
+  --color-darkElevated: #111111;
+}
+
+/* Base Setup */
+html, body {
+    background-color: var(--color-darkBg);
+    color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+::-webkit-scrollbar { display: none; }
+
+/* Premium noise texture */
+.noise-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Custom Cursor */
+@media (pointer: fine) {
+    body { cursor: none; }
+    .cursor-dot, .cursor-outline {
+        position: fixed;
+        top: 0; left: 0;
+        border-radius: 50%;
+        z-index: 9999;
+        pointer-events: none;
+        will-change: transform;
+    }
+    .cursor-dot {
+        width: 8px; height: 8px;
+        background-color: var(--color-brandRed);
+    }
+    .cursor-outline {
+        width: 40px; height: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    }
+    body.cursor-hover .cursor-outline {
+        width: 80px; height: 80px;
+        background-color: rgba(255, 0, 51, 0.1);
+        border-color: var(--color-brandRed);
+        backdrop-filter: blur(2px);
+    }
+}
+@media (hover: none) and (pointer: coarse) {
+    .cursor-dot, .cursor-outline { display: none !important; }
+}
+
+/* Outline text effect */
+.text-outline-red {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--color-brandRed);
+    transition: color 0.4s ease;
+}
+@media (min-width: 768px) {
+    .text-outline-red { -webkit-text-stroke: 2px var(--color-brandRed); }
+}
+.text-outline-red:hover { color: var(--color-brandRed); }
+
+/* Typography */
+.hero-title {
+    font-size: clamp(3rem, 11vw, 12rem);
+    line-height: 1.1;
+    margin: 0;
+    padding: 0.1em 0;
+    white-space: nowrap;
+}
+
+/* Image Bottom Fade Mask */
+.img-mask-fade {
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+
+/* SplitType setup */
+.line { overflow: hidden; padding-bottom: 0.15em; margin-bottom: -0.15em; }
+.char { transform: translateY(115%); transition: transform 0.5s; }
+
+/* Magnetic button */
+.magnetic-wrap { position: relative; display: inline-block; padding: 20px; margin: -20px; }
+
+/* Infinite Marquee */
+.marquee-wrapper {
+    display: flex;
+    width: max-content;
+    animation: marquee 20s linear infinite;
+}
+@keyframes marquee {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Magic Fixed Image styling */
+#magic-img {
+    will-change: transform;
+    /* Ekdom center e set kora holo, JS diye x transform kore side e anbo */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+}
