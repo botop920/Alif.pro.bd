@@ -312,21 +312,18 @@ export default function App() {
           {/* 1. Hero Section (Award-Winning Clean Overlap Structure) */}
           <section
             id="hero"
-            className="relative w-full h-[100dvh] md:min-h-[700px] flex flex-col items-center justify-center overflow-hidden bg-[#050505]"
+            className="relative w-full h-[100dvh] md:min-h-[700px] flex flex-col items-center justify-center overflow-hidden"
           >
-            {/* Premium Spotlight Effect */}
-            <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[80vw] h-[80vw] bg-brandRed/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
-            
-            {/* Ambient Glow (Existing) */}
-            <div className="ambient-glow-red opacity-50"></div>
+            {/* Ambient Glow */}
+            <div className="ambient-glow-red"></div>
 
             {/* Intro Paragraph (Top Center) */}
-            <div className="absolute top-[12%] md:top-[18%] z-30 opacity-0 fade-in-elem w-full text-center px-4">
-              <p className="text-gray-400 font-serif italic text-sm md:text-xl tracking-wide">
+            <div className="absolute top-[15%] md:top-[18%] z-30 opacity-0 fade-in-elem w-full text-center px-4">
+              <p className="text-gray-400 font-medium text-sm md:text-lg tracking-wide">
                 👋 Hi, I'm Alif Shahariar. Founder of{' '}
                 <a
                   href="#"
-                  className="text-white font-sans font-medium hover:text-brandRed transition-colors hoverable border-b border-gray-600 hover:border-brandRed pb-0.5"
+                  className="text-white hover:text-brandRed transition-colors hoverable border-b border-gray-600 hover:border-brandRed pb-0.5"
                 >
                   Examio.xyz
                 </a>
@@ -334,29 +331,27 @@ export default function App() {
             </div>
 
             {/* Massive Background Typography (Fixed Center) */}
-            <div className="absolute top-[45%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center justify-center z-10 pointer-events-none parallax-text will-change-transform">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center justify-center z-10 pointer-events-none parallax-text will-change-transform">
               <div className="overflow-hidden w-full text-center py-2">
-                <h1 className="hero-title font-display uppercase tracking-tight text-white m-0 opacity-0 text-anim leading-[0.9]">
+                <h1 className="hero-title font-display uppercase tracking-tight text-white m-0 opacity-0 text-anim">
                   Tech Founder
                 </h1>
               </div>
               {/* Negative margin brings them tighter */}
-              <div className="overflow-hidden w-full text-center -mt-[2vw] md:-mt-[3vw] pointer-events-auto hoverable py-2">
-                <h1 className="hero-title font-display uppercase tracking-tight text-outline-red m-0 opacity-0 text-anim transition-colors duration-300 leading-[0.9]">
+              <div className="overflow-hidden w-full text-center -mt-[4vw] md:-mt-[3vw] pointer-events-auto hoverable py-2">
+                <h1 className="hero-title font-display uppercase tracking-tight text-outline-red m-0 opacity-0 text-anim transition-colors duration-300">
                   & AI Enthusiast
                 </h1>
               </div>
             </div>
 
             {/* Foreground User Image (Anchored perfectly to the bottom) */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 w-[90%] sm:w-[65%] md:w-[55%] lg:w-[40%] max-w-[650px] h-[60vh] md:h-[75vh] pointer-events-none flex items-end justify-center opacity-0 image-anim parallax-img will-change-transform">
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 w-[95%] sm:w-[70%] md:w-[60%] lg:w-[45%] max-w-[700px] h-[85vh] md:h-[75vh] pointer-events-none flex items-end justify-center opacity-0 image-anim parallax-img will-change-transform">
               <img
                 src="https://res.cloudinary.com/dejm7pz1d/image/upload/v1771718749/IMG_3072_m8dqgg.png"
                 alt="Alif Shahariar"
                 className="w-full h-full object-contain object-bottom founder-image-glow pointer-events-auto"
               />
-              {/* Bottom Fade Mask for smooth integration */}
-              <div className="absolute bottom-0 left-0 w-full h-[20%] bg-gradient-to-t from-[#050505] to-transparent z-30"></div>
             </div>
 
             {/* Location Info (Bottom Left) */}
