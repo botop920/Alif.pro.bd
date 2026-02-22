@@ -70,9 +70,8 @@ html, body {
     background-size: 250% 100%;
     -webkit-background-clip: text;
     background-clip: text;
-    animation: shine 10s infinite cubic-bezier(0.4, 0, 0.2, 1); /* Slower animation for performance */
-    text-shadow: 0 0 20px rgba(255, 0, 51, 0.2); /* Reduced shadow radius */
-    will-change: background-position;
+    animation: shine 6s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    text-shadow: 0 0 30px rgba(255, 0, 51, 0.3);
 }
 
 @keyframes shine {
@@ -86,15 +85,13 @@ html, body {
 
 /* Founder Image Styles */
 .founder-image-glow {
-    filter: grayscale(100%) contrast(1.1); /* Removed expensive drop-shadow */
+    filter: grayscale(100%) contrast(1.1) drop-shadow(0 0 25px rgba(255, 255, 255, 0.15));
     transition: filter 0.5s ease;
     mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-    will-change: filter, transform;
-    transform: translateZ(0); /* Force hardware acceleration */
 }
 .founder-image-glow:hover {
-    filter: grayscale(0%) contrast(1.05); /* Removed expensive drop-shadow */
+    filter: grayscale(0%) contrast(1.05) drop-shadow(0 0 30px rgba(255, 0, 51, 0.2));
 }
 
 /* Ambient Glow */
@@ -102,13 +99,13 @@ html, body {
     position: absolute;
     width: 60vw;
     height: 60vw;
-    background: radial-gradient(circle, rgba(255, 0, 51, 0.06) 0%, transparent 70%); /* Reduced opacity */
+    background: radial-gradient(circle, rgba(255, 0, 51, 0.08) 0%, transparent 70%);
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) translateZ(0);
+    transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 0;
-    will-change: transform;
+    filter: blur(60px);
 }
 .hero-title {
     font-size: clamp(3rem, 11vw, 12rem);
@@ -116,6 +113,14 @@ html, body {
     margin: 0;
     padding: 0.1em 0;
     white-space: nowrap;
+    will-change: transform, opacity;
+}
+
+/* Performance Optimizations */
+.parallax-text, .parallax-img, .reveal-on-scroll {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
 }
 
 /* Image Bottom Fade Mask */
