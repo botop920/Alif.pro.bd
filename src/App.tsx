@@ -539,7 +539,12 @@ export default function App() {
               <div className="flex flex-col w-full relative">
                 <div className="w-full h-[1px] bg-gray-800 absolute top-0 left-0 line-reveal"></div>
                 {/* Venture 1 */}
-                <div className="reveal-on-scroll py-12 md:py-20 flex flex-col md:flex-row md:items-center justify-between group cursor-pointer hoverable relative">
+                <a 
+                  href="https://examio.xyz" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="reveal-on-scroll py-12 md:py-20 flex flex-col md:flex-row md:items-center justify-between group cursor-pointer hoverable relative block w-full"
+                >
                   <div className="w-full h-[1px] bg-gray-800 absolute bottom-0 left-0 line-reveal"></div>
                   <div className="md:w-1/2">
                     <h3 className="text-5xl md:text-7xl lg:text-[7rem] font-display uppercase text-white group-hover:-webkit-text-stroke-[2px] group-hover:-webkit-text-stroke-brandRed group-hover:text-transparent transition-all duration-500 mb-6 md:mb-0 leading-none break-words">
@@ -557,15 +562,15 @@ export default function App() {
                       methodologies.
                     </p>
                     <div className="flex items-center gap-4">
-                      <p className="text-brandRed text-[10px] md:text-xs tracking-[0.2em] uppercase font-bold border border-gray-800 px-4 py-2 rounded-full group-hover:border-brandRed transition-colors">
+                      <p className="text-brandRed text-[10px] md:text-xs tracking-[0.2em] uppercase font-bold border border-gray-800 px-4 py-2 rounded-full group-hover:border-brandRed group-hover:bg-brandRed/10 transition-all duration-300">
                         Founder • Architecture
                       </p>
-                      <div className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center group-hover:bg-brandRed text-white transition-all duration-300 transform group-hover:rotate-45">
+                      <div className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center group-hover:bg-brandRed text-white transition-all duration-300 transform group-hover:rotate-45 group-hover:scale-110">
                         <i className="ph ph-arrow-up-right text-lg"></i>
                       </div>
                     </div>
                   </div>
-                </div>
+                </a>
 
                 {/* Venture 2 */}
                 <div className="reveal-on-scroll py-12 md:py-20 flex flex-col md:flex-row md:items-center justify-between group cursor-pointer hoverable relative">
