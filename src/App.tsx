@@ -96,7 +96,6 @@ export default function App() {
           );
         });
 
-        // Cleanup cursor events
         return () => {
           window.removeEventListener('mousemove', onMouseMove);
           document.removeEventListener('mouseleave', onMouseLeave);
@@ -141,18 +140,21 @@ export default function App() {
         });
      }
 
-    // --- 4. Intro Loading Animation (Butter Smooth) ---
+    // --- 4. Intro Loading Animation ---
     const timer = setTimeout(() => {
-        // Split text for granular control
         const heroTitles = new SplitType('.text-anim', { types: 'chars, words' });
         
         const tlIntro = gsap.timeline();
 
-        // Initial State Set
-        gsap.set('.text-anim', { opacity: 1 }); // Make parent visible so chars can be seen
-        gsap.set(heroTitles.chars, { y: 100, opacity: 0, filter: 'blur(10px)' });
-        gsap.set('.image-anim', { y: 100, opacity: 0, scale: 1.1, filter: 'blur(20px)' });
-        gsap.set('.fade-in-elem', { y: 20, opacity: 0, filter: 'blur(5px)' });
+        // FIX: Set everything to its FINAL position immediately to prevent layout shift
+        // Only animate opacity/blur/filter, NOT position for layout-critical elements
+        gsap.set('.text-anim', { opacity: 1 });
+        gsap.set(heroTitles.chars, { y: 60, opacity: 0, filter: 'blur(8px)' });
+        
+        // FIX: Image - do NOT animate x/y that could cause left-right shift
+        // Only animate opacity, scale(subtle), blur
+        gsap.set('.image-anim', { opacity: 0, scale: 1.04, filter: 'blur(15px)' });
+        gsap.set('.fade-in-elem', { opacity: 0, filter: 'blur(4px)' });
 
         tlIntro
         .to('.nav-anim', {
@@ -178,7 +180,6 @@ export default function App() {
             '.image-anim',
             { 
                 opacity: 1, 
-                y: 0, 
                 scale: 1, 
                 filter: 'blur(0px)', 
                 duration: 1.8, 
@@ -189,7 +190,6 @@ export default function App() {
         .to(
             '.fade-in-elem',
             { 
-                y: 0, 
                 opacity: 1, 
                 filter: 'blur(0px)', 
                 duration: 1, 
@@ -200,7 +200,6 @@ export default function App() {
         );
 
         // --- 5. Organic Blurry Scroll Parallax ---
-        // Text Parallax (Moves faster, blurs out)
         gsap.fromTo(".parallax-text", 
             { yPercent: 0, opacity: 1, filter: "blur(0px)", scale: 1 },
             {
@@ -218,7 +217,6 @@ export default function App() {
             }
         );
 
-        // Image Parallax (Moves slower, subtle blur)
         gsap.fromTo(".parallax-img", 
             { yPercent: 0, scale: 1, filter: "blur(0px) grayscale(0%)" },
             {
@@ -234,7 +232,6 @@ export default function App() {
                 ease: "none"
             }
         );
-
 
         // --- 6. Premium Scroll Reveal Animations ---
         const revealElements = document.querySelectorAll('.reveal-on-scroll');
@@ -342,21 +339,22 @@ export default function App() {
 
       </nav>
 
-      {/* Main Content Wrapped for Lenis Smooth Scroll */}
+      {/* Main Content */}
       <div id="smooth-wrapper" className="relative z-10 bg-[#050505] mb-[80vh]">
         <div id="smooth-content">
-          {/* 1. Hero Section (Award-Winning Clean Overlap Structure) */}
+
+          {/* 1. Hero Section */}
           <section
             id="hero"
-            className="relative w-full h-[100dvh] md:min-h-[700px] flex flex-col items-center justify-center overflow-hidden"
+            className="relative w-full h-[100dvh] flex flex-col items-center justify-center overflow-hidden"
           >
             {/* Ambient Glow */}
             <div className="ambient-glow-red"></div>
 
             {/* Intro Paragraph (Top Center) */}
-            <div className="absolute top-[15%] md:top-[18%] z-30 opacity-0 fade-in-elem w-full text-center px-4">
+            <div className="absolute top-[12%] md:top-[18%] z-30 opacity-0 fade-in-elem w-full text-center px-4">
               <p className="text-gray-400 font-medium text-sm md:text-lg tracking-wide">
-                Hi, I'm Alif Shahariar.
+                Hi, I'm Alif Shahariar. Founder of{' '}
                 <a
                   href="#"
                   className="text-white hover:text-brandRed transition-colors hoverable border-b border-gray-600 hover:border-brandRed pb-0.5"
@@ -366,48 +364,84 @@ export default function App() {
               </p>
             </div>
 
-            {/* Massive Background Typography (Fixed Center) - BEHIND IMAGE */}
-            <div className="absolute top-[40%] md:top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center justify-center z-10 pointer-events-none parallax-text">
-              <div className="overflow-hidden w-full text-center py-2">
-                <h1 className="hero-title font-display uppercase tracking-tight text-white m-0 opacity-0 text-anim">
+            {/*
+             * ============================================================
+             * HERO TEXT LAYER SYSTEM
+             * The trick: two copies of both lines, one behind image (z-10),
+             * one in front (z-30). The "behind" copy shows line 1 only,
+             * the "front" copy shows line 2 only. Image sits at z-20.
+             * ============================================================
+             */}
+
+            {/* --- TEXT BEHIND IMAGE: only "TECH FOUNDER" is visible --- */}
+            <div
+              className="
+                absolute
+                left-1/2 -translate-x-1/2
+                w-full flex flex-col items-center justify-center
+                z-10 pointer-events-none parallax-text
+                top-[38%] md:top-[40%] -translate-y-1/2
+              "
+            >
+              {/* LINE 1: TECH FOUNDER — VISIBLE, sits behind image */}
+              <div className="overflow-hidden w-full text-center py-1">
+                <h1 className="hero-title font-display uppercase tracking-tight text-white m-0 opacity-0 text-anim leading-none">
                   Tech Founder
                 </h1>
               </div>
-              {/* Hidden placeholder to maintain spacing */}
-              <div className="overflow-hidden w-full text-center -mt-[4vw] md:-mt-[3vw] py-2 opacity-0">
-                <h1 className="hero-title font-display uppercase tracking-tight m-0">
-                  & Ai Enthusiast
+              {/* LINE 2: placeholder (invisible, keeps layout spacing) */}
+              <div className="overflow-hidden w-full text-center -mt-[3vw] md:-mt-[2.5vw] py-1 opacity-0 pointer-events-none select-none">
+                <h1 className="hero-title font-display uppercase tracking-tight m-0 leading-none">
+                  &amp; Ai Enthusiast
                 </h1>
               </div>
             </div>
 
-            {/* Massive Background Typography (Fixed Center) - IN FRONT OF IMAGE */}
-            <div className="absolute top-[40%] md:top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center justify-center z-30 pointer-events-none parallax-text">
-              {/* Hidden placeholder to maintain spacing */}
-              <div className="overflow-hidden w-full text-center py-2 opacity-0">
-                <h1 className="hero-title font-display uppercase tracking-tight m-0">
-                  Tech Founder
-                </h1>
-              </div>
-              {/* Negative margin brings them tighter */}
-              <div className="overflow-hidden w-full text-center -mt-[4vw] md:-mt-[3vw] pointer-events-auto hoverable py-2">
-                <h1 className="hero-title font-display uppercase tracking-tight text-outline-red m-0 opacity-0 text-anim transition-colors duration-300">
-                  & Ai Enthusiast
-                </h1>
-              </div>
-            </div>
-
-            {/* Foreground User Image (Anchored perfectly to the bottom) */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 w-[95%] sm:w-[70%] md:w-[60%] lg:w-[45%] max-w-[700px] h-[85vh] md:h-[75vh] pointer-events-none flex items-end justify-center opacity-0 image-anim parallax-img">
+            {/* --- IMAGE (middle layer z-20) --- */}
+            <div
+              className="
+                absolute bottom-0 left-1/2 -translate-x-1/2
+                z-20 pointer-events-none
+                w-[85%] sm:w-[65%] md:w-[55%] lg:w-[42%] max-w-[680px]
+                h-[78dvh] md:h-[80vh]
+                flex items-end justify-center
+                opacity-0 image-anim parallax-img
+              "
+            >
               <img
                 src="https://res.cloudinary.com/dejm7pz1d/image/upload/v1771718749/IMG_3072_m8dqgg.png"
                 alt="Alif Shahariar"
                 className="w-full h-full object-contain object-bottom founder-image-glow pointer-events-auto"
+                style={{ display: 'block' }}
               />
             </div>
 
+            {/* --- TEXT IN FRONT OF IMAGE: only "& AI ENTHUSIAST" is visible --- */}
+            <div
+              className="
+                absolute
+                left-1/2 -translate-x-1/2
+                w-full flex flex-col items-center justify-center
+                z-30 pointer-events-none parallax-text
+                top-[38%] md:top-[40%] -translate-y-1/2
+              "
+            >
+              {/* LINE 1: placeholder (invisible, keeps spacing identical) */}
+              <div className="overflow-hidden w-full text-center py-1 opacity-0 pointer-events-none select-none">
+                <h1 className="hero-title font-display uppercase tracking-tight m-0 leading-none">
+                  Tech Founder
+                </h1>
+              </div>
+              {/* LINE 2: & AI ENTHUSIAST — VISIBLE, sits in front of image */}
+              <div className="overflow-hidden w-full text-center -mt-[3vw] md:-mt-[2.5vw] pointer-events-auto hoverable py-1">
+                <h1 className="hero-title font-display uppercase tracking-tight text-outline-red m-0 opacity-0 text-anim leading-none transition-colors duration-300">
+                  &amp; Ai Enthusiast
+                </h1>
+              </div>
+            </div>
+
             {/* Location Info (Bottom Left) */}
-            <div className="absolute bottom-8 left-6 md:left-12 z-30 opacity-0 fade-in-elem">
+            <div className="absolute bottom-6 left-6 md:bottom-8 md:left-12 z-30 opacity-0 fade-in-elem">
               <div className="text-xs md:text-sm text-gray-500">
                 based in <br />
                 <span className="text-gray-300 font-medium">
@@ -416,8 +450,8 @@ export default function App() {
               </div>
             </div>
 
-            {/* Scroll Down Indicator (Bottom Right) */}
-            <div className="absolute bottom-12 right-6 md:right-12 z-30 opacity-0 fade-in-elem flex flex-col items-center gap-2 hidden md:flex">
+            {/* Scroll Down Indicator (Bottom Right) — desktop only */}
+            <div className="absolute bottom-12 right-6 md:right-12 z-30 opacity-0 fade-in-elem hidden md:flex flex-col items-center gap-2">
               <span className="text-[10px] uppercase tracking-[0.3em] text-gray-500 rotate-90 translate-y-6">
                 Scroll
               </span>
@@ -450,7 +484,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* 2. Vision Section (With Text Generate Effect) */}
+          {/* 2. Vision Section */}
           <section
             id="vision"
             className="min-h-[80vh] py-24 md:py-32 px-5 md:px-12 w-full flex flex-col justify-center items-center relative z-10"
@@ -461,7 +495,6 @@ export default function App() {
                 01 // The Vision
               </p>
 
-              {/* Text Generate Effect Class */}
               <TextGenerateEffect
                 words="Building innovative products driven by AI. Passionate about scaling startups and solving real-world problems."
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif font-medium leading-[1.2] text-white tracking-wide"
@@ -568,7 +601,7 @@ export default function App() {
             </div>
           </section>
 
-          {/* Footer Reveal Spacer (Tells the page to scroll past so footer shows from behind) */}
+          {/* Footer Reveal Spacer */}
           <div
             id="footer-trigger"
             className="h-[80vh] w-full bg-transparent pointer-events-none"
