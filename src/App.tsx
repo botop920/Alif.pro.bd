@@ -195,6 +195,61 @@ export default function App() {
             filter: "blur(4px)"
         });
 
+        // --- 6. Premium Scroll Reveal Animations ---
+        const revealElements = document.querySelectorAll('.reveal-on-scroll');
+        revealElements.forEach((el) => {
+            gsap.fromTo(el, 
+                { y: 50, opacity: 0, filter: 'blur(10px)' },
+                {
+                    y: 0, 
+                    opacity: 1, 
+                    filter: 'blur(0px)',
+                    duration: 1.2,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+
+        // --- 7. Line Drawing Animation ---
+        const lines = document.querySelectorAll('.line-reveal');
+        lines.forEach((line) => {
+            gsap.fromTo(line,
+                { scaleX: 0, transformOrigin: "left center" },
+                {
+                    scaleX: 1,
+                    duration: 1.5,
+                    ease: 'expo.out',
+                    scrollTrigger: {
+                        trigger: line,
+                        start: 'top 90%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+
+        // --- 8. Footer Reveal Animation ---
+        gsap.fromTo(".footer-content", 
+            { y: 50, opacity: 0, filter: 'blur(10px)' },
+            {
+                y: 0,
+                opacity: 1,
+                filter: 'blur(0px)',
+                duration: 1.2,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: "#footer-trigger",
+                    start: "top 70%", 
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+
     }, 100);
 
     return () => {
@@ -276,7 +331,7 @@ export default function App() {
             </div>
 
             {/* Massive Background Typography (Fixed Center) */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center justify-center z-10 pointer-events-none parallax-text">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center justify-center z-10 pointer-events-none parallax-text will-change-transform">
               <div className="overflow-hidden w-full text-center py-2">
                 <h1 className="hero-title font-display uppercase tracking-tight text-white m-0 opacity-0 text-anim">
                   Tech Founder
@@ -291,7 +346,7 @@ export default function App() {
             </div>
 
             {/* Foreground User Image (Anchored perfectly to the bottom) */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 w-[95%] sm:w-[70%] md:w-[60%] lg:w-[45%] max-w-[700px] h-[85vh] md:h-[75vh] pointer-events-none flex items-end justify-center opacity-0 image-anim parallax-img">
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 w-[95%] sm:w-[70%] md:w-[60%] lg:w-[45%] max-w-[700px] h-[85vh] md:h-[75vh] pointer-events-none flex items-end justify-center opacity-0 image-anim parallax-img will-change-transform">
               <img
                 src="https://res.cloudinary.com/dejm7pz1d/image/upload/v1771718749/IMG_3072_m8dqgg.png"
                 alt="Alif Shahariar"
@@ -346,10 +401,11 @@ export default function App() {
           {/* 2. Vision Section (With Text Generate Effect) */}
           <section
             id="vision"
-            className="min-h-[80vh] py-24 md:py-32 px-5 md:px-12 w-full flex flex-col justify-center items-center relative z-10 border-t border-gray-900"
+            className="min-h-[80vh] py-24 md:py-32 px-5 md:px-12 w-full flex flex-col justify-center items-center relative z-10"
           >
+            <div className="w-full h-[1px] bg-gray-900 absolute top-0 left-0 line-reveal"></div>
             <div className="w-full max-w-5xl mx-auto flex flex-col items-center text-center">
-              <p className="text-[10px] md:text-xs tracking-[0.3em] text-brandRed uppercase font-semibold mb-8">
+              <p className="reveal-on-scroll text-[10px] md:text-xs tracking-[0.3em] text-brandRed uppercase font-semibold mb-8">
                 01 // The Vision
               </p>
 
@@ -359,8 +415,9 @@ export default function App() {
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif font-medium leading-[1.2] text-white tracking-wide"
               />
 
-              <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 text-left w-full border-t border-gray-800 pt-16">
-                <div>
+              <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 text-left w-full pt-16 relative">
+                <div className="w-full h-[1px] bg-gray-800 absolute top-0 left-0 line-reveal"></div>
+                <div className="reveal-on-scroll">
                   <div className="flex items-center gap-2 mb-4">
                     <i className="ph ph-rocket-launch text-brandRed text-2xl"></i>
                     <TypewriterEffectSmooth 
@@ -375,7 +432,7 @@ export default function App() {
                     impact in the modern ecosystem.
                   </p>
                 </div>
-                <div>
+                <div className="reveal-on-scroll">
                   <div className="flex items-center gap-2 mb-4">
                     <i className="ph ph-cpu text-brandRed text-2xl"></i>
                     <TypewriterEffectSmooth 
@@ -397,16 +454,19 @@ export default function App() {
           {/* 3. Ventures Section */}
           <section
             id="ventures"
-            className="min-h-screen py-24 md:py-32 px-5 md:px-12 w-full flex items-center relative z-10 border-t border-gray-900 bg-[#050505]"
+            className="min-h-screen py-24 md:py-32 px-5 md:px-12 w-full flex items-center relative z-10 bg-[#050505]"
           >
+            <div className="w-full h-[1px] bg-gray-900 absolute top-0 left-0 line-reveal"></div>
             <div className="w-full max-w-6xl mx-auto flex flex-col">
-              <h2 className="text-[10px] md:text-xs tracking-[0.3em] text-brandRed uppercase font-semibold mb-16 text-center md:text-left">
+              <h2 className="reveal-on-scroll text-[10px] md:text-xs tracking-[0.3em] text-brandRed uppercase font-semibold mb-16 text-center md:text-left">
                 02 // Key Ventures
               </h2>
 
-              <div className="flex flex-col w-full border-t border-gray-800">
+              <div className="flex flex-col w-full relative">
+                <div className="w-full h-[1px] bg-gray-800 absolute top-0 left-0 line-reveal"></div>
                 {/* Venture 1 */}
-                <div className="py-12 md:py-20 border-b border-gray-800 flex flex-col md:flex-row md:items-center justify-between group cursor-pointer hoverable">
+                <div className="reveal-on-scroll py-12 md:py-20 flex flex-col md:flex-row md:items-center justify-between group cursor-pointer hoverable relative">
+                  <div className="w-full h-[1px] bg-gray-800 absolute bottom-0 left-0 line-reveal"></div>
                   <div className="md:w-1/2">
                     <h3 className="text-5xl md:text-7xl lg:text-[7rem] font-display uppercase text-white group-hover:-webkit-text-stroke-[2px] group-hover:-webkit-text-stroke-brandRed group-hover:text-transparent transition-all duration-500 mb-6 md:mb-0 leading-none break-words">
                       Examio.xyz
@@ -430,7 +490,8 @@ export default function App() {
                 </div>
 
                 {/* Venture 2 */}
-                <div className="py-12 md:py-20 border-b border-gray-800 flex flex-col md:flex-row md:items-center justify-between group cursor-pointer hoverable">
+                <div className="reveal-on-scroll py-12 md:py-20 flex flex-col md:flex-row md:items-center justify-between group cursor-pointer hoverable relative">
+                  <div className="w-full h-[1px] bg-gray-800 absolute bottom-0 left-0 line-reveal"></div>
                   <div className="md:w-1/2">
                     <h3 className="text-5xl md:text-7xl lg:text-[7rem] font-display uppercase text-white group-hover:-webkit-text-stroke-[2px] group-hover:-webkit-text-stroke-brandRed group-hover:text-transparent transition-all duration-500 mb-6 md:mb-0 leading-none break-words">
                       AI Labs
@@ -468,7 +529,7 @@ export default function App() {
         id="contact"
         className="fixed bottom-0 left-0 w-full h-[80vh] flex flex-col items-center justify-center bg-[#050505] z-0 px-5 md:px-12 border-t border-gray-900"
       >
-        <div className="max-w-7xl mx-auto flex flex-col items-center text-center w-full relative z-10">
+        <div className="footer-content max-w-7xl mx-auto flex flex-col items-center text-center w-full relative z-10">
           <p className="text-brandRed uppercase tracking-[0.3em] text-[10px] md:text-xs font-bold mb-6">
             Ready to innovate?
           </p>
