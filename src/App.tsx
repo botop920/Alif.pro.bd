@@ -371,17 +371,33 @@ export default function App() {
               </p>
             </div>
 
-            {/* Massive Background Typography (Fixed Center) */}
+            {/* Massive Background Typography (Fixed Center) - BEHIND IMAGE */}
             <div className="absolute top-[40%] md:top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center justify-center z-10 pointer-events-none parallax-text">
               <div className="overflow-hidden w-full text-center py-2">
                 <h1 className="hero-title font-display uppercase tracking-tight text-white m-0 opacity-0 text-anim">
                   Tech Founder
                 </h1>
               </div>
+              {/* Hidden placeholder to maintain spacing */}
+              <div className="overflow-hidden w-full text-center -mt-[4vw] md:-mt-[3vw] py-2 opacity-0">
+                <h1 className="hero-title font-display uppercase tracking-tight m-0">
+                  & Ai Enthusiast
+                </h1>
+              </div>
+            </div>
+
+            {/* Massive Background Typography (Fixed Center) - IN FRONT OF IMAGE */}
+            <div className="absolute top-[40%] md:top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center justify-center z-30 pointer-events-none parallax-text">
+              {/* Hidden placeholder to maintain spacing */}
+              <div className="overflow-hidden w-full text-center py-2 opacity-0">
+                <h1 className="hero-title font-display uppercase tracking-tight m-0">
+                  Tech Founder
+                </h1>
+              </div>
               {/* Negative margin brings them tighter */}
               <div className="overflow-hidden w-full text-center -mt-[4vw] md:-mt-[3vw] pointer-events-auto hoverable py-2">
                 <h1 className="hero-title font-display uppercase tracking-tight text-outline-red m-0 opacity-0 text-anim transition-colors duration-300">
-                  & AI Enthusiast
+                  & Ai Enthusiast
                 </h1>
               </div>
             </div>
