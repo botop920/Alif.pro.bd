@@ -403,7 +403,7 @@ export default function App() {
                 absolute bottom-0 left-1/2 -translate-x-1/2
                 z-20 pointer-events-none
                 w-[85%] sm:w-[65%] md:w-[55%] lg:w-[42%] max-w-[680px]
-                h-[78dvh] md:h-[80vh]
+                h-[60dvh] md:h-[80vh]
                 flex items-end justify-center
                 opacity-0 image-anim parallax-img
               "
