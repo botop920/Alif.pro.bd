@@ -11,6 +11,7 @@ import SplitType from 'split-type';
 import { TextGenerateEffect } from './components/ui/text-generate-effect';
 import { TypewriterEffectSmooth } from './components/ui/typewriter-effect';
 import { EncryptedText } from './components/ui/encrypted-text';
+import { AnonymousMessage } from './components/AnonymousMessage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -361,6 +362,7 @@ export default function App() {
             Ventures
             <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brandRed transition-all duration-300 group-hover:w-full"></span>
           </a>
+          <AnonymousMessage />
         </div>
 
         <div className="magnetic-wrap hidden md:block">
