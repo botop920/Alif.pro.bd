@@ -29,8 +29,8 @@ export const TextGenerateEffect = ({
           filter: filter ? "blur(0px)" : "none",
         },
         {
-          duration: duration ? duration : 1,
-          delay: stagger(0.2),
+          duration: duration ? duration : 0.5,
+          delay: stagger(0.08),
         }
       );
     }
