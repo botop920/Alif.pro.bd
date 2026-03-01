@@ -53,10 +53,14 @@ export function AnonymousMessage() {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="hoverable hover:text-white transition-colors relative group text-sm font-medium text-gray-300"
+        className="hoverable relative group text-xs md:text-sm font-bold text-brandRed flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-brandRed/30 bg-brandRed/10 hover:bg-brandRed hover:text-black transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,0,0,0.4)]"
       >
-        Send Anonymous Message
-        <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brandRed transition-all duration-300 group-hover:w-full"></span>
+        <span className="relative flex h-2 w-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brandRed opacity-75 group-hover:bg-black"></span>
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-brandRed group-hover:bg-black transition-colors"></span>
+        </span>
+        <span className="hidden md:inline">Send Anonymous Message</span>
+        <span className="md:hidden">Secret Msg</span>
       </button>
 
       <AnimatePresence>

@@ -362,16 +362,18 @@ export default function App() {
             Ventures
             <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brandRed transition-all duration-300 group-hover:w-full"></span>
           </a>
-          <AnonymousMessage />
         </div>
 
-        <div className="magnetic-wrap hidden md:block">
-          <a
-            href="#contact"
-            className="magnetic-btn hoverable bg-white text-black px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-brandRed hover:text-white transition-colors duration-300 inline-block"
-          >
-            Let's Talk
-          </a>
+        <div className="flex items-center gap-4 md:gap-6">
+          <AnonymousMessage />
+          <div className="magnetic-wrap hidden md:block">
+            <a
+              href="#contact"
+              className="magnetic-btn hoverable bg-white text-black px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-brandRed hover:text-white transition-colors duration-300 inline-block"
+            >
+              Let's Talk
+            </a>
+          </div>
         </div>
 
       </nav>
