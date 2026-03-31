@@ -144,7 +144,7 @@ export default function App() {
 
     // --- 4. Intro Loading Animation ---
     const timer = setTimeout(() => {
-        const heroTitles = new SplitType('.text-anim', { types: 'chars, words' });
+        const heroTitles = new SplitType('.text-anim', { types: 'chars,words' });
         
         const tlIntro = gsap.timeline();
 
@@ -613,7 +613,34 @@ export default function App() {
                   </div>
                 </a>
 
-                {/* Venture 2 */}
+                {/* Venture 2: Toron */}
+                <div className="reveal-on-scroll py-12 md:py-20 flex flex-col md:flex-row md:items-center justify-between group cursor-pointer hoverable relative">
+                  <div className="w-full h-[1px] bg-gray-800 absolute bottom-0 left-0 line-reveal"></div>
+                  <div className="md:w-1/2">
+                    <h3 className="text-5xl md:text-7xl lg:text-[7rem] font-display uppercase text-white group-hover:-webkit-text-stroke-[2px] group-hover:-webkit-text-stroke-brandRed group-hover:text-transparent transition-all duration-500 mb-6 md:mb-0 leading-none break-words">
+                      <EncryptedText 
+                        text="Toron" 
+                        revealDelayMs={100}
+                        encryptedClassName="text-brandRed"
+                      />
+                    </h3>
+                  </div>
+                  <div className="md:w-1/2 md:pl-12 flex flex-col items-start">
+                    <p className="text-gray-400 text-base md:text-lg mb-8 max-w-md">
+                      Exam preparation app with advanced AI features. Upload an image and AI will generate Board/Admission standard exams in minutes.
+                    </p>
+                    <div className="flex items-center gap-4">
+                      <p className="text-brandRed text-[10px] md:text-xs tracking-[0.2em] uppercase font-bold border border-gray-800 px-4 py-2 rounded-full group-hover:border-brandRed transition-colors">
+                        AI • EdTech • Coming Soon
+                      </p>
+                      <div className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center group-hover:bg-brandRed text-white transition-all duration-300 transform group-hover:rotate-45">
+                        <i className="ph ph-arrow-up-right text-lg"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Venture 3: AI Labs */}
                 <div className="reveal-on-scroll py-12 md:py-20 flex flex-col md:flex-row md:items-center justify-between group cursor-pointer hoverable relative">
                   <div className="w-full h-[1px] bg-gray-800 absolute bottom-0 left-0 line-reveal"></div>
                   <div className="md:w-1/2">
@@ -646,15 +673,14 @@ export default function App() {
 
           {/* Footer Reveal Spacer */}
           <div
-            id="footer-trigger"
             className="h-[80vh] w-full bg-transparent pointer-events-none"
           ></div>
+          <div id="contact" className="h-[1px] w-full"></div>
         </div>
       </div>
 
       {/* 4. Parallax Fixed Footer */}
       <footer
-        id="contact"
         className="fixed bottom-0 left-0 w-full h-[80vh] flex flex-col items-center justify-center bg-[#050505] z-0 px-5 md:px-12 border-t border-gray-900"
       >
         <div className="footer-content max-w-7xl mx-auto flex flex-col items-center text-center w-full relative z-10">
@@ -668,6 +694,7 @@ export default function App() {
 
           <div className="magnetic-wrap mt-2 md:mt-4">
             <a
+              id="email-link"
               href="mailto:alif@examio.xyz"
               className="magnetic-btn inline-block text-xl sm:text-2xl md:text-4xl font-medium border-b-2 border-brandRed pb-1 md:pb-2 hover:text-brandRed transition-colors hoverable break-all"
             >
